@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { AuthContext } from '../contexts/AuthContext'
 import { ThemeContext } from '../contexts/ThemeContext'
 
 class Navbar extends Component {
@@ -7,25 +8,33 @@ class Navbar extends Component {
     render() { 
         // Retorna o componente. 
         return ( 
-            <ThemeContext.Consumer>{(context) => {
-                // Desestrutura as propriedades do contexto.
-                const { isLightTheme, light, dark } = context
-                // Define qual tema estara ativo com base no estado de isLightTheme.
-                const theme = isLightTheme ? light : dark
+            <AuthContext.Consumer>{(authContext) => (
+                <ThemeContext.Consumer>{(themeContext) => {
 
-                return(
-                    // Define as propriedades dentro do estilo dinamicamente para ficar de acordo com o tema.
-                    <nav style={{ background: theme.ui, color: theme.syntax }}>
-                        <h1> Context app </h1>
-                        <ul>
-                            <li> Home </li>
-                            <li> About </li>
-                            <li> Contact </li>
-                        </ul>
-                    </nav>
-                )
-            }}
-            </ThemeContext.Consumer>
+                    const { isAuthenticated, toggleAuth } = authContext
+                    // Desestrutura as propriedades do contexto.
+                    const { isLightTheme, light, dark } = themeContext
+                    // Define qual tema estara ativo com base no estado de isLightTheme.
+                    const theme = isLightTheme ? light : dark
+
+                    return(
+                        // Define as propriedades dentro do estilo dinamicamente para ficar de acordo com o tema.
+                        <nav style={{ background: theme.ui, color: theme.syntax }}>
+                            <h1> Context app </h1>
+                            <div onClick={ toggleAuth }>
+                                { isAuthenticated ? 'Logged in' : 'Logged out' }
+                            </div>
+                            <ul>
+                                <li> Home </li>
+                                <li> About </li>
+                                <li> Contact </li>
+                            </ul>
+                        </nav>
+                    )
+                }}
+                </ThemeContext.Consumer>
+            )}
+            </AuthContext.Consumer>
          )
     }
 }
