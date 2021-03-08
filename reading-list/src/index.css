@@ -13,13 +13,13 @@ body {
   margin: 30px auto;
   text-align: center;
 }
-.nav {
+nav {
   padding: 5px;
 }
-.nav ul {
+nav ul {
   padding: 0;
 }
-.nav ul li {
+nav ul li {
   display: inline-block;
   margin: 0 10px;
 }
