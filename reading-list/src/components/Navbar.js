@@ -9,11 +9,10 @@ class Navbar extends Component {
         // Retorna o componente. 
         return ( 
             <AuthContext.Consumer>{(authContext) => (
-                <ThemeContext.Consumer>{(themeContext) => {
-
-                    const { isAuthenticated, toggleAuth } = authContext
+                <ThemeContext.Consumer>{(themeContext) => {  
                     // Desestrutura as propriedades do contexto.
                     const { isLightTheme, light, dark } = themeContext
+                    const { isAuthenticated, toggleAuth } = authContext
                     // Define qual tema estara ativo com base no estado de isLightTheme.
                     const theme = isLightTheme ? light : dark
 
